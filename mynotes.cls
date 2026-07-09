@@ -9,7 +9,7 @@
 \RequirePackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 
 % 核心数学包
-\RequirePackage{amsmath, amssymb, amsthm, physics}
+\RequirePackage{amsmath, amssymb, amsthm, mathrsfs, physics}
 
 % 颜色与超链接
 \RequirePackage{xcolor}

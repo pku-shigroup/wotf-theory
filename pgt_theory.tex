@@ -61,13 +61,12 @@ The complex field in the experiment is
 
 \section{PGT theory derivation}
 
-Taking the Fourier transform with respect to \(z\) on both sides of Eq. \ref{eq:fdt}, we have\footnote{$2\pi$ factor in Fourier transforming
-	a plane wave is omitted, because what matters is the ratio between terms.}:
+Taking the Fourier transform with respect to \(z\) on both sides of Eq. \ref{eq:fdt}, we have:
 
 \begin{equation}\label{eq:complextf}
 	\widetilde{\psi}_{\text{scat}}(\mathbf{k})
 	=P(\mathbf{k_{\perp}})
-	\frac{\delta(k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}}^2})}{2 \ii k_z}
+	\frac{\pi \delta(k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}}^2})}{\ii k_z}
 	\widetilde{F}(\mathbf{k}-\mathbf{k}_{\text{inc}}).
 \end{equation}
 
@@ -76,8 +75,8 @@ we must also account for the unscattered field. In frequency domain,
 
 \begin{equation}
 	\widetilde{\psi}_{\text{tot}}(\mathbf{k})
-	=P(\mathbf{k_{\perp}})\delta^{(3)}(\mathbf{k}-\mathbf{k}_{\text{inc}})
-	+P(\mathbf{k_{\perp}})\frac{\delta(k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}}^2})}{2 \ii k_z} \widetilde{F}(\mathbf{k}-\mathbf{k}_{\text{inc}})
+	=(2 \pi)^3 P(\mathbf{k_{\perp}})\delta^{(3)}(\mathbf{k}-\mathbf{k}_{\text{inc}})
+	+P(\mathbf{k_{\perp}})\frac{\pi \delta(k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}}^2})}{\ii k_z} \widetilde{F}(\mathbf{k}-\mathbf{k}_{\text{inc}})
 \end{equation}
 
 The intensity stack captured in PGT experiment is related to the scattered field by
@@ -99,31 +98,32 @@ The two terms that contribute significantly to the intensity stack are
 
 \begin{equation}
 	\widetilde{I}_{\text{i-i}}
-	=P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})\delta^{(3)}(\mathbf{k})
-	=\abs{P(\mathbf{k_{\text{inc}, \perp}})}^2\delta^{(3)}(\mathbf{k}),
+	=(2 \pi)^3 P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})\delta^{(3)}(\mathbf{k})
+	=(2 \pi)^3 \abs{P(\mathbf{k_{\text{inc}, \perp}})}^2\delta^{(3)}(\mathbf{k}),
 \end{equation}
 
 and
 
 \begin{equation}\label{eq:cross}
 	\begin{aligned}
-		\widetilde{I}_{\text{i-s}}
-		= & \int\dd \mathbf{k'}^{3}\,\bigg[P^*(-\mathbf{k_{\perp}}')
+		\widetilde{I}_{\text{i-s}}(\mathbf{k})
+		= & \frac{1}{(2 \pi)^3}\int\dd \mathbf{k'}^{3}\,                                             \\
+		  & \bigg[(2 \pi)^3 P^*(-\mathbf{k_{\perp}}')
 			\delta^{(3)*}(-\mathbf{k}'-\mathbf{k}_{\text{inc}})
 			P(\mathbf{k_{\perp}}-\mathbf{k_{\perp}}')
-			\frac{\delta(k_z - k_z' - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}-\mathbf{k}_{\perp}'}^2})}
-		{2 \ii (k_z-k_z')} \widetilde{F}(\mathbf{k}-\mathbf{k}'-\mathbf{k}_{\text{inc}})             \\
+			\frac{\pi \delta(k_z - k_z' - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}-\mathbf{k}_{\perp}'}^2})}
+		{\ii (k_z-k_z')} \widetilde{F}(\mathbf{k}-\mathbf{k}'-\mathbf{k}_{\text{inc}})               \\
 		  & -P^*(-\mathbf{k_{\perp}}')
-			\frac{\delta^{*}(-k_z' - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}'}^2})}
+			\frac{\pi \delta^{*}(-k_z' - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}'}^2})}
 			{2 \ii (-k_z')} \widetilde{F}^*(-\mathbf{k}'-\mathbf{k}_{\text{inc}})
-			P(\mathbf{k_{\perp}}-\mathbf{k_{\perp}}')
+			(2 \pi)^3 P(\mathbf{k_{\perp}}-\mathbf{k_{\perp}}')
 		\delta^{(3)}(\mathbf{k}-\mathbf{k}'-\mathbf{k}_{\text{inc}})\bigg]                           \\
 		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
-		{2 \ii (k_z+k_{\text{inc},z})} \widetilde{F}(\mathbf{k})                                     \\
+		\frac{\pi \delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{\ii (k_z+k_{\text{inc},z})} \widetilde{F}(\mathbf{k})                                       \\
 		  & -P(\mathbf{k_{\text{inc}, \perp}})P^*(\mathbf{k_{\text{inc}, \perp}}-\mathbf{k_{\perp}})
-		\frac{\delta(k_{\text{inc}, z} - k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}-\mathbf{k}_{\perp}}^2})}
-		{2 \ii (k_{\text{inc}, z} - k_z)} \widetilde{F}^*(-\mathbf{k}).                              \\
+		\frac{\pi \delta(k_{\text{inc}, z} - k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}-\mathbf{k}_{\perp}}^2})}
+		{\ii (k_{\text{inc}, z} - k_z)} \widetilde{F}^*(-\mathbf{k}).                                \\
 	\end{aligned}
 \end{equation}
 
@@ -131,14 +131,14 @@ Further break Eq. \ref{eq:cross} into the real part and imaginary part of $F$ to
 
 \begin{equation}
 	\begin{aligned}
-		\widetilde{I}_{\text{i-s}}
+		\widetilde{I}_{\text{i-s}}(\mathbf{k})
 		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
-		{2 \ii (k_z+k_{\text{inc},z})}
+		\frac{\pi \delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{\ii (k_z+k_{\text{inc},z})}
 		\left[\widetilde{F}_{\text{re}}(\mathbf{k}) + \ii\widetilde{F}_{\text{im}}(\mathbf{k})\right]  \\
 		  & -P(\mathbf{k_{\text{inc}, \perp}})P^*(\mathbf{k_{\text{inc}, \perp}}-\mathbf{k_{\perp}})
-		\frac{\delta(k_{\text{inc}, z} - k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}-\mathbf{k}_{\perp}}^2})}
-		{2 \ii (k_{\text{inc}, z} - k_z)}
+		\frac{\pi \delta(k_{\text{inc}, z} - k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}-\mathbf{k}_{\perp}}^2})}
+		{\ii (k_{\text{inc}, z} - k_z)}
 		\left[\widetilde{F}_{\text{re}}(\mathbf{k}) - \ii\widetilde{F}_{\text{im}}(\mathbf{k})\right]. \\
 	\end{aligned}
 \end{equation}
@@ -147,8 +147,8 @@ For real part of the scattering potential,
 
 \begin{equation}
 	\begin{aligned}
-		\widetilde{I}_{\text{i-s, re}}
-		= -\frac{\ii}{2}
+		\widetilde{I}_{\text{i-s, re}}(\mathbf{k})
+		= -\pi \ii
 		\bigg[
 		 & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
 			\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
@@ -164,8 +164,8 @@ for the imaginary part of the scattering potential,
 
 \begin{equation}
 	\begin{aligned}
-		\widetilde{I}_{\text{i-s, im}}
-		= \frac{1}{2}
+		\widetilde{I}_{\text{i-s, im}}(\mathbf{k})
+		= \pi
 		\bigg[
 		 & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
 			\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
@@ -180,6 +180,4 @@ for the imaginary part of the scattering potential,
 The correctness of the derivation is verified against Ling et al. (2018).
 For illumination using extended source, the transfer functions can be obtained
 by integrating with respect to the source distribution.
-
-
 \end{document}

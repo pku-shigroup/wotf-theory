@@ -1,0 +1,139 @@
+\documentclass{mynotes}
+
+\begin{document}
+
+\title{PGT theory derivation}
+\author{Zhang Kai}
+\date{\today}
+
+\tableofcontents
+
+\maketitle
+
+\section{The analytical way of calculating PGT TFs}
+
+\begin{equation}
+	\begin{aligned}
+		\widetilde{I}_{\text{i-s}}(\mathbf{k})
+		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+		\frac{\pi \delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{\ii (k_z+k_{\text{inc},z})}
+		\left[\widetilde{F}_{\text{re}}(\mathbf{k}) + \ii\widetilde{F}_{\text{im}}(\mathbf{k})\right]  \\
+		  & -P(\mathbf{k_{\text{inc}, \perp}})P^*(\mathbf{k_{\text{inc}, \perp}}-\mathbf{k_{\perp}})
+		\frac{\pi \delta(k_{\text{inc}, z} - k_z - \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}-\mathbf{k}_{\perp}}^2})}
+		{\ii (k_{\text{inc}, z} - k_z)}
+		\left[\widetilde{F}_{\text{re}}(\mathbf{k}) - \ii\widetilde{F}_{\text{im}}(\mathbf{k})\right]. \\
+	\end{aligned}
+\end{equation}
+
+Extract the first term
+
+\begin{equation}
+	\begin{aligned}
+		\widetilde{I}_{\text{i-s}}(\mathbf{k})
+		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{2 \ii (k_z+k_{\text{inc},z})}
+	\end{aligned}
+\end{equation}
+
+The TFs can be assembled from
+
+\begin{equation}
+	\begin{aligned}
+		\widetilde{I}_{\text{i-s}}(\mathbf{k})
+		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{2 \ii (k_z+k_{\text{inc},z})}
+	\end{aligned}
+\end{equation}
+
+TFs is accumulative, IFT to get the easy-to-assemble form
+
+\begin{equation}
+	\begin{aligned}
+		P^*(\mathbf{k_{\text{inc}, \perp}})\ee^{-\ii k_{\text{inc}, z} z}
+		P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+		\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2}z}}
+		{2 \ii (k_z+k_{\text{inc},z})}
+	\end{aligned}
+\end{equation}
+
+To assemble the final TFs, integrate the above equation over source
+
+
+\begin{equation}
+	\begin{aligned}
+		\iint\,\dd^2 \mathbf{k}_{\perp} S(\mathbf{k}_{\text{inc}, \perp})
+		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii k_{\text{inc}, z} z} \right]^*
+		\left[ P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2}z}}
+			{2 \ii (k_z+k_{\text{inc},z})} \right]
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+		\iint\,\dd^2 \mathbf{k}_{\perp} S(\mathbf{k}_{\text{inc}, \perp})
+		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z} \right]^*
+		\left[ P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
+			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2} z}}
+			{2 \ii (k_z+k_{\text{inc},z})} \right]
+	\end{aligned}
+\end{equation}
+
+The above formula has the form of correlation and can be calculated
+effectively by FFT
+
+\begin{equation}
+	\begin{aligned}
+		A = \left[S(\mathbf{k}_{\text{inc}, \perp})
+			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z}\right]
+		\otimes_{\text{corr}} \left[ P(\mathbf{k}_{\text{inc}, \perp})
+			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}}^2} z}}
+			{2 \ii k_{\text{inc},z}} \right]
+	\end{aligned}
+\end{equation}
+
+Do the same thing with the second term
+
+\begin{equation}
+	\begin{aligned}
+		B = \left[ P(\mathbf{k}_{\text{inc}, \perp})
+			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}}^2} z}}
+			{2 \ii k_{\text{inc},z}} \right]
+		\otimes_{\text{corr}}
+		\left[S(\mathbf{k}_{\text{inc}, \perp})
+			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z}\right]
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+		A \otimes_{\text{corr}} B = \iint \dd\,\mathbf{x}' A^*(\mathbf{x}') B(\mathbf{x}+\mathbf{x}')
+	\end{aligned}
+\end{equation}
+
+FFT is the best way to calculate correlation
+
+\begin{equation}
+	\mathscr{F}\left[\iint \dd\,\mathbf{x}' A^*(\mathbf{x}') B(\mathbf{x}+\mathbf{x}')\right]
+	=\mathscr{F}\left[A^*(-\mathbf{x}) \otimes_{\text{conv}} B(\mathbf{x})\right]
+	=\widetilde{A}^*(\mathbf{k})\widetilde{B}(\mathbf{k})
+\end{equation}
+
+This equation says
+
+\begin{equation}
+	A(\mathbf{x}) \otimes_{\text{corr}} B(\mathbf{x})
+	= \mathscr{F}^{-1}\left[\widetilde{A}^*(\mathbf{k})\widetilde{B}(\mathbf{k})\right]
+	= \mathscr{F}^{-1}\left\{\mathscr{F}^*[A(\mathbf{x})]\mathscr{F}[B(\mathbf{x})]\right\}
+\end{equation}
+
+So, in order to calculate the second term, just take the conjugation
+of the product of the two ffts, which explains how real/imaginary parts
+correspond to the real/imaginary TFs.
+
+The derivation above is casual and don't seem all that natural, but
+at least it explains how Tian et al. calculated the TFs.
+\end{document}
