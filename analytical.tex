@@ -32,8 +32,8 @@ Extract the first term
 	\begin{aligned}
 		\widetilde{I}_{\text{i-s}}(\mathbf{k})
 		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
-		{2 \ii (k_z+k_{\text{inc},z})}
+		\frac{\pi \delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{\ii (k_z+k_{\text{inc},z})}
 	\end{aligned}
 \end{equation}
 
@@ -43,8 +43,8 @@ The TFs can be assembled from
 	\begin{aligned}
 		\widetilde{I}_{\text{i-s}}(\mathbf{k})
 		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-		\frac{\delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
-		{2 \ii (k_z+k_{\text{inc},z})}
+		\frac{\pi \delta(k_z + k_{\text{inc}, z} - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2})}
+		{\ii (k_z+k_{\text{inc},z})}
 	\end{aligned}
 \end{equation}
 
@@ -64,7 +64,7 @@ To assemble the final TFs, integrate the above equation over source
 
 \begin{equation}
 	\begin{aligned}
-		\iint\,\dd^2 \mathbf{k}_{\perp} S(\mathbf{k}_{\text{inc}, \perp})
+		\iint\,\dd^2 \mathbf{k}_{\text{inc}, \perp} S(\mathbf{k}_{\text{inc}, \perp})
 		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii k_{\text{inc}, z} z} \right]^*
 		\left[ P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
 			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2}z}}
