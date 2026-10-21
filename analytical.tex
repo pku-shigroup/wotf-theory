@@ -52,33 +52,23 @@ TFs is accumulative, IFT to get the easy-to-assemble form
 
 \begin{equation}
 	\begin{aligned}
-		P^*(\mathbf{k_{\text{inc}, \perp}})\ee^{-\ii k_{\text{inc}, z} z}
+		P^*(\mathbf{k_{\text{inc}, \perp}})\ee^{-\ii \beta(k_{\text{inc}, \perp}) z}
 		P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-		\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2}z}}
-		{2 \ii (k_z+k_{\text{inc},z})}
+		\frac{\ee^{\ii \beta(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}) z}}
+		{2 \ii \beta(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})}
 	\end{aligned}
 \end{equation}
+where $\beta(\mathbf{p}) = \sqrt{k_m^2 - \abs{\mathbf{p}}^2}$.
 
 To assemble the final TFs, integrate the above equation over source
-
 
 \begin{equation}
 	\begin{aligned}
 		\iint\,\dd^2 \mathbf{k}_{\text{inc}, \perp} S(\mathbf{k}_{\text{inc}, \perp})
-		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii k_{\text{inc}, z} z} \right]^*
+		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \beta(k_{\text{inc}, \perp}) z} \right]^*
 		\left[ P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2}z}}
-			{2 \ii (k_z+k_{\text{inc},z})} \right]
-	\end{aligned}
-\end{equation}
-
-\begin{equation}
-	\begin{aligned}
-		\iint\,\dd^2 \mathbf{k}_{\perp} S(\mathbf{k}_{\text{inc}, \perp})
-		\left[ P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z} \right]^*
-		\left[ P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
-			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}}^2} z}}
-			{2 \ii (k_z+k_{\text{inc},z})} \right]
+			\frac{\ee^{\ii \beta(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp}) z}}
+			{2 \ii \beta(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})} \right]
 	\end{aligned}
 \end{equation}
 
@@ -88,10 +78,10 @@ effectively by FFT
 \begin{equation}
 	\begin{aligned}
 		A = \left[S(\mathbf{k}_{\text{inc}, \perp})
-			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z}\right]
+			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \beta(k_{\text{inc}, \perp}) z}\right]
 		\otimes_{\text{corr}} \left[ P(\mathbf{k}_{\text{inc}, \perp})
-			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}}^2} z}}
-			{2 \ii k_{\text{inc},z}} \right]
+			\frac{\ee^{\ii \beta(k_{\text{inc}, \perp}) z}}
+			{2 \ii \beta(k_{\text{inc}, \perp})} \right]
 	\end{aligned}
 \end{equation}
 
@@ -100,34 +90,34 @@ Do the same thing with the second term
 \begin{equation}
 	\begin{aligned}
 		B = \left[ P(\mathbf{k}_{\text{inc}, \perp})
-			\frac{\ee^{\ii \sqrt{k_m^2 - \abs{\mathbf{k}_{\text{inc}, \perp}}^2} z}}
-			{2 \ii k_{\text{inc},z}} \right]
+			\frac{\ee^{\ii \beta(k_{\text{inc}, \perp}) z}}
+			{2 \ii \beta(k_{\text{inc}, \perp})} \right]
 		\otimes_{\text{corr}}
 		\left[S(\mathbf{k}_{\text{inc}, \perp})
-			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \sqrt{k_m^2 - |\mathbf{k}_{\text{inc}, \perp}|^2} z}\right]
-	\end{aligned}
-\end{equation}
-
-\begin{equation}
-	\begin{aligned}
-		A \otimes_{\text{corr}} B = \iint \dd\,\mathbf{x}' A^*(\mathbf{x}') B(\mathbf{x}+\mathbf{x}')
+			P(\mathbf{k_{\text{inc}, \perp}})\ee^{\ii \beta(k_{\text{inc}, \perp}) z}\right]
 	\end{aligned}
 \end{equation}
 
 FFT is the best way to calculate correlation
 
 \begin{equation}
-	\mathscr{F}\left[\iint \dd\,\mathbf{x}' A^*(\mathbf{x}') B(\mathbf{x}+\mathbf{x}')\right]
-	=\mathscr{F}\left[A^*(-\mathbf{x}) \otimes_{\text{conv}} B(\mathbf{x})\right]
-	=\widetilde{A}^*(\mathbf{k})\widetilde{B}(\mathbf{k})
+	\begin{aligned}
+		F \otimes_{\text{corr}} G = \iint \dd\,\mathbf{x}' F^*(\mathbf{x}') G(\mathbf{x}+\mathbf{x}')
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\mathscr{F}\left[\iint \dd\,\mathbf{x}' F^*(\mathbf{x}') G(\mathbf{x}+\mathbf{x}')\right]
+	=\mathscr{F}\left[F^*(-\mathbf{x}) \otimes_{\text{conv}} G(\mathbf{x})\right]
+	=\widetilde{F}^*(\mathbf{k})\widetilde{G}(\mathbf{k})
 \end{equation}
 
 This equation says
 
 \begin{equation}
-	A(\mathbf{x}) \otimes_{\text{corr}} B(\mathbf{x})
-	= \mathscr{F}^{-1}\left[\widetilde{A}^*(\mathbf{k})\widetilde{B}(\mathbf{k})\right]
-	= \mathscr{F}^{-1}\left\{\mathscr{F}^*[A(\mathbf{x})]\mathscr{F}[B(\mathbf{x})]\right\}
+	F(\mathbf{x}) \otimes_{\text{corr}} G(\mathbf{x})
+	= \mathscr{F}^{-1}\left[\widetilde{F}^*(\mathbf{k})\widetilde{G}(\mathbf{k})\right]
+	= \mathscr{F}^{-1}\left\{\mathscr{F}^*[F(\mathbf{x})]\mathscr{F}[G(\mathbf{x})]\right\}
 \end{equation}
 
 So, in order to calculate the second term, just take the conjugation

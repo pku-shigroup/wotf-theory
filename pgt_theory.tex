@@ -13,7 +13,7 @@
 \section{Fourier Diffraction Theorem (FDT)}
 Under the first Born approximation, the scattered field is given by the following integral:
 \begin{equation}
-	\psi_{\text{scat}}(\mathbf{r}) = \int G(\mathbf{r},\mathbf{r}') F(\mathbf{r}') \psi_{\text{inc}}(\mathbf{r}') \, \dd^3\mathbf{r}'.
+	\psi_{\text{scat}}(\mathbf{r}) = -\int G(\mathbf{r},\mathbf{r}') F(\mathbf{r}') \psi_{\text{inc}}(\mathbf{r}') \, \dd^3\mathbf{r}'.
 \end{equation}
 
 Here, \(G(\mathbf{r},\mathbf{r}')=\frac{\ee^{\ii k_m r}}{4\pi r}\) is the Green's function of the medium, where \(r = |\mathbf{r} - \mathbf{r}'|\).
@@ -24,7 +24,7 @@ The scattering potential \(F(\mathbf{r}')\) is defined as:
 
 Under the out-going wave condition, and using the convolution theorem, the scattered field can be expressed in the Fourier domain as:
 \begin{equation}
-	\widetilde{\psi}_{\text{scat}}(\mathbf{k}) = \frac{\widetilde{F}(\mathbf{k}-\mathbf{k}_{\text{inc}})}{k^2 - k_m^2 - \ii 0^+}.
+	\widetilde{\psi}_{\text{scat}}(\mathbf{k}) = -\frac{\widetilde{F}(\mathbf{k}-\mathbf{k}_{\text{inc}})}{k^2 - k_m^2 - \ii 0^+}.
 \end{equation}
 
 \dots
@@ -43,7 +43,7 @@ pupil function
 \begin{equation}
 	P(\mathbf{k}_{\perp})
 	=\begin{cases}
-		1, & \abs{\mathbf{k}_{\perp}}<\text{NA}_{\text{det}}/\lambda \\
+		1, & \abs{\mathbf{k}_{\perp}}<2\pi\text{NA}_{\text{det}}/\lambda \\
 		0, & \text{else}
 	\end{cases},
 \end{equation}
@@ -88,7 +88,8 @@ The intensity stack captured in PGT experiment is related to the scattered field
 Using the convolution theorem of Fourier transform, the spectrum of the intensity stack can be expressed as
 
 \begin{equation}\label{eq:ispec}
-	\widetilde{I}(\mathbf{k})=\widetilde{\psi}^*(-\mathbf{k})\ast\widetilde{\psi}(\mathbf{k}).
+	\widetilde{I}(\mathbf{k})
+	=\frac{1}{(2\pi)^3} \widetilde{\psi}^*(-\mathbf{k})\ast\widetilde{\psi}(\mathbf{k}).
 \end{equation}
 
 In expanding Eq. \ref{eq:ispec}, we obtain three terms, the \text{i-i} term, the cross \text{i-s} term and the s-s term. In the weak scattering regime, the s-s term is
@@ -115,7 +116,7 @@ and
 		{\ii (k_z-k_z')} \widetilde{F}(\mathbf{k}-\mathbf{k}'-\mathbf{k}_{\text{inc}})               \\
 		  & -P^*(-\mathbf{k_{\perp}}')
 			\frac{\pi \delta^{*}(-k_z' - \sqrt{k_m^2 - \abs{\mathbf{k}_{\perp}'}^2})}
-			{2 \ii (-k_z')} \widetilde{F}^*(-\mathbf{k}'-\mathbf{k}_{\text{inc}})
+			{\ii (-k_z')} \widetilde{F}^*(-\mathbf{k}'-\mathbf{k}_{\text{inc}})
 			(2 \pi)^3 P(\mathbf{k_{\perp}}-\mathbf{k_{\perp}}')
 		\delta^{(3)}(\mathbf{k}-\mathbf{k}'-\mathbf{k}_{\text{inc}})\bigg]                           \\
 		= & P^*(\mathbf{k_{\text{inc}, \perp}})P(\mathbf{k}_{\perp}+\mathbf{k}_{\text{inc}, \perp})
